@@ -22,6 +22,8 @@ search: true
 http://api.easypnr.com/v2/
 ```
 
+**New API Available! http://docs.easypnr.com/api/v3/**
+
 Welcome to the **EasyPNR API** documentation! Following the further instructions you will be able to decode Amadeus, Sabre and Galileo PNRs directly on your application.
 
 The **EasyPNR API** is a REST Server available at the endpoint [http://api.easypnr.com/v2](http://api.easypnr.com/v2/).
