@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>EasyPNR API Version 2.0</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+    
+    <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-41029690-1', 'easypnr.com');
+            ga('require', 'displayfeatures');
+            ga('send', 'pageview');
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-41029690-1']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+  </head>
+
+  <body class="index" data-languages="[&quot;curl&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="curl">curl</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href="https://easypnr.com/signup" target="_blank">Sign up to use this API</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<blockquote>
+<p>API Endpoint Version 2</p>
+</blockquote>
+<pre class="highlight plaintext"><code>http://api.easypnr.com/v2/
+</code></pre>
+
+<p><strong>New API Available! http://docs.easypnr.com/api/v3/</strong></p>
+
+<p>Welcome to the <strong>EasyPNR API</strong> documentation! Following the further instructions you will be able to decode Amadeus, Sabre and Galileo PNRs directly on your application.</p>
+
+<p>The <strong>EasyPNR API</strong> is a REST Server available at the endpoint <a href="http://api.easypnr.com/v2/">http://api.easypnr.com/v2</a>.</p>
+
+<p>The API is pretty simple, anyway, in case of problems, contact us on <a href="mailto:support@easypnr.com">support@easypnr.com</a> or using the form available on the <a href="http://www.easypnr.com/contact]">website</a>.</p>
+
+<h1 id="authentication">Authentication</h1>
+
+<blockquote>
+<p>Do a POST request passing your username and password, and save the value returned on the Header <strong>Location</strong>:</p>
+</blockquote>
+<pre class="highlight plaintext"><code># Request
+curl -i -X POST -d "username=myuser@company.com&amp;password=secret" https://accounts.easypnr.com/v1/tickets
+
+# Response
+HTTP/1.1 201 Created
+Location: https://accounts.easypnr.com/v1/tickets/TGT-16-JAS2AXFXPAKXPinSOmggVfRYUtEm4jJeZJWSzaTJcnBqfCQDUVbY-sso01.easypnr.com
+</code></pre>
+
+<p>To use the Web services, you must have a free or paid account and use your credentials for authentication and obtain a <strong>Token</strong>.</p>
+
+<p>Authentication is done with a HTTP POST to the endpoint <a href="https://accounts.easypnr.com/v1/tickets">https://accounts.easypnr.com/v1/tickets</a> with your username and password.</p>
+
+<p>In the server response, locate the value returned on HTTP Header &ldquo;Location&rdquo; and do a new request to obtain a <em>Token</em>. On this new POST request, send as parameter the service <em>&ldquo;https://api.easypnr.com&rdquo;</em>.</p>
+
+<blockquote>
+<p>Do a new POST request using the previous <strong>Location</strong> value that you saved, and passing the <strong>service</strong> parameter:</p>
+</blockquote>
+<pre class="highlight plaintext"><code># Request
+curl -i -X POST -d "service=https://api.easypnr.com" https://accounts.easypnr.com/v1/tickets/TGT-16-JAS2AXFXPAKXPinSOmggVfRYUtEm4jJeZJWSzaTJcnBqfCQDUVbY-sso01.easypnr.com
+
+# Response
+HTTP/1.1 200 OK
+...
+ST-5-aex0tCChpfmUgDbeHQbTTOg-sso01.easypnr.com
+</code></pre>
+
+<blockquote>
+<p>If the response status is 200, you got your <strong>Token</strong>.</p>
+</blockquote>
+
+<p>If everything worked, you will got a <strong>Token</strong>. It usually expires in one day, when this occurs, you just need to repeat the steps to obtain it again.</p>
+
+<h1 id="decode">decode</h1>
+<pre class="highlight plaintext"><code># Request
+curl -i -X POST -d "encodedPNR=1.JOHNSON/BRIAN MR  2.JOHNSON/BRENDA MRS \n 2 QR 905 E 06MAR 4 DOHMEL HK1 1  0005 0810+1 *1A/E*"  -H "Content-Type: application/json" -H "Token: ST-5-aex0tCChpfmUgDbeHQbTTOg-sso01.easypnr.com" https://api.easypnr.com/v2/decode
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"persons"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"BRIAN"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"lastName"</span><span class="p">:</span><span class="s2">"JOHNSON"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"MR"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"rawData"</span><span class="p">:</span><span class="s2">"JOHNSON/BRIAN MR"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"BRENDA"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"lastName"</span><span class="p">:</span><span class="s2">"JOHNSON"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"MRS"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"rawData"</span><span class="p">:</span><span class="s2">"JOHNSON/BRENDA MRS \\n"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"others"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"flightInfo"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"flights"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"company"</span><span class="p">:{</span><span class="w">
+               </span><span class="nt">"iataCode"</span><span class="p">:</span><span class="s2">"QR"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"description"</span><span class="p">:</span><span class="s2">"Qatar Airways"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"departureTime"</span><span class="p">:</span><span class="s2">"2016-03-06 00:05:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"landingTime"</span><span class="p">:</span><span class="s2">"2016-03-07 08:10:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"departureAirport"</span><span class="p">:{</span><span class="w">
+               </span><span class="nt">"iataCode"</span><span class="p">:</span><span class="s2">"DOH"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"description"</span><span class="p">:</span><span class="s2">"Hamad International Airport - Doha, Qatar"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"flight"</span><span class="p">:</span><span class="s2">"905"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"landingAirport"</span><span class="p">:{</span><span class="w">
+               </span><span class="nt">"iataCode"</span><span class="p">:</span><span class="s2">"MEL"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"description"</span><span class="p">:</span><span class="s2">"Melbourne Airport - Melbourne, Victoria, Australia"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"hotelInfo"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"hotels"</span><span class="p">:[</span><span class="w">
+
+      </span><span class="p">]</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"trainInfo"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"trains"</span><span class="p">:[</span><span class="w">
+
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"stationNames"</span><span class="p">:{</span><span class="w">
+
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Decode a PNR.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.easypnr.com/v2/decode</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>encodedPNR</td>
+<td>true</td>
+<td>false</td>
+<td>The PNR that will be decoded.</td>
+</tr>
+</tbody></table>
+
+<!-- aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside-->
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="curl">curl</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
