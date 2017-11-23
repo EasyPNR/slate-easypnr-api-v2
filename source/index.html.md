@@ -21,8 +21,9 @@ search: true
 ```
 http://api.easypnr.com/v2/
 ```
-
-**New API Available! http://docs.easypnr.com/api/v3/**
+<aside class="success">
+This version is deprecated, you must use the new version. Check it on <a href="http://127.0.0.1:4567">https://www.easypnr.com/webservice</a>.
+</aside>
 
 Welcome to the **EasyPNR API** documentation! Following the further instructions you will be able to decode Amadeus, Sabre and Galileo PNRs directly on your application.
 
